@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinTrac</title>
+    <link rel="stylesheet" href="mainpagestyle.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.20/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.20/index.global.min.js'></script>
+    <script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth'
+        });
+        calendar.render();
+      });
+
+    </script>
+</head>
+<body>
+    <div class="topbar">
+        <div class="topbar-left">
+            <i class='bx bx-menu'></i>
+            <p class="title">FinTrac</p>
+        </div>
+        
+        <div class="topbar-right">
+            <p class="username">Username</p>
+            <i class='bx bxs-user-circle'></i> 
+        </div>
+        
+    </div>
+
+    <div class="main-layout">
+        <div class="sidebar">
+            <button class="nav-link" onclick="showTab('dashboard-area')">Dashboard</button>
+            <button class="nav-link" onclick="showTab('transaction-area')">Transaction</button>
+            <button class="nav-link" onclick="showTab('subscription-area')">Subscription</button>
+            <button class="nav-link" onclick="showTab('savings-goals-area')">Savings goals</button>
+            <button class="nav-link" onclick="showTab('calendar-area')">Calendar</button>
+        </div>
+
+        <main class="content-area">
+            <!--DashBoard-------------------------->
+            <div id="dashboard-area" class="tab-content">
+                <h1>Dashboard</h1>
+                <div class="topcards">
+                    <div class="total-balance">
+                        <p class="title">Total Balance</p>
+                        <p class="number">$NA</p>
+                        <p class="bottom">all accounts</p>
+                    </div>
+                    <div class="monthly-income">
+                        <p class="title">Monthly Income</p>
+                        <p class="number">$NA</p>
+                        <p class="bottom">This month</p>
+                    </div>
+                    <div class="monthly-expenses">
+                        <p class="title">Monthly Expenses</p>
+                        <p class="number">$NA</p>
+                        <p class="bottom">This month</p>
+                    </div>
+                    <div class="net-savings">
+                        <p class="title">Net Savings</p>
+                        <p class="number">$NA</p>
+                        <p class="bottom">This month</p>
+                    </div>
+                
+                </div>
+                <div class="bottomcards">
+                    <div class="dash-left">
+                        <div class="recent-transaction">
+                            <p class="rec-title">Recent Transaction</p>
+                            <button class="filter-link" data-target="all">All</button>
+                            <button class="filter-link" data-target="income">Income</button>
+                            <button class="filter-link" data-target="expense">Expense</button>
+                        </div>
+                    </div>
+                    <div class="dash-right">
+                        <div class="spending-category">
+                            <p>Spending by Category</p>
+                        </div>
+                        <div class="savings-goals">
+                            <p>Savings Goals</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bottombar">
+                    <button class="gen-report">Generate Report</button>
+                </div>
+                
+            </div>
+
+            <!--Transaction--------------------->
+            <div id="transaction-area" class="tab-content">
+                <h1>Transaction</h1>
+                <div class="bottomcards">
+                    <div class="transaction-details">
+                        <p>Transaction Details</p>
+
+                        <div class="top"></div>
+                        <div class="middle"></div>
+                        <div class="bottom"></div>
+                    </div>
+
+                    <div class="transaction-history">
+                        <p>Transaction History</p>
+
+                        <div class="filters">
+                            <button class="filter-link">All</button>
+                            <button class="filter-link">This Month</button>
+                            <button class="filter-link">Last 7 Days</button>
+                        </div>
+                        <div class="transaction-list"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Subsciption--------------------->
+            <div id="subscription-area" class="tab-content">
+                <h1>Subscription</h1>
+                <div class="topcards">
+                    <div class="total-sub">
+                        <p class="title">Total Subscriptions</p>
+                        <p class="number">$NA</p>
+                    </div>
+                    <div class="monthly-cost">
+                        <p class="title">Monthly Cost</p>
+                        <p class="number">$NA</p>
+                    </div>
+                    <div class="renew">
+                        <p class="title">Renewing this week</p>
+                        <p class="number">$NA</p>
+                    </div>
+                </div>
+                <div class="bottomcard">
+                    <div class="active-sub">
+                        <p class="title">Active Subscription</p>
+
+                        <div class="act-sub">
+                            <div class="act-left">
+                                <p class="name">Sub 1</p>
+                                <p class="date">Renews NA</p>
+                            </div>
+                            <div class="act-right">
+                                <p class="days">NA days</p>
+                                <p class="dollar">$NA/mo</p>
+                            </div>
+                        </div>
+
+                        <div class="act-sub">
+                            <div class="act-left">
+                                <p class="name">Sub 2</p>
+                                <p class="date">Renews NA</p>
+                            </div>
+                            <div class="act-right">
+                                <p class="days">NA days</p>
+                                <p class="dollar">$NA/mo</p>
+                            </div>
+                        </div>
+
+                        <div class="act-sub">
+                            <div class="act-left">
+                                <p class="name">Sub 3</p>
+                                <p class="date">Renews NA</p>
+                            </div>
+                            <div class="act-right">
+                                <p class="days">NA days</p>
+                                <p class="dollar">$NA/mo</p>
+                            </div>
+                        </div>
+
+                        <div class="act-sub">
+                            <div class="act-left">
+                                <p class="name">Sub 4</p>
+                                <p class="date">Renews NA</p>
+                            </div>
+                            <div class="act-right">
+                                <p class="days">NA days</p>
+                                <p class="dollar">$NA/mo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Savings goals--------------------->
+            <div id="savings-goals-area" class="tab-content">
+                <h1>Savings Goals</h1>
+
+                <div class="topcards">
+                    <div class="goal">
+                        <p class="title">Goal 1</p>
+                        <p class="number">$NA</p>
+                        <progress id="progress-bar1" class="progress-bar" value="70" max="100"> 70% </progress>
+                    </div>
+                    <div class="goal">
+                        <p class="title">Goal 2</p>
+                        <p class="number">$NA</p>
+                        <progress id="progress-bar2" class="progress-bar" value="70" max="100"> 70% </progress>
+                    </div>
+                    <div class="goal">
+                        <p class="title">Goal 3</p>
+                        <p class="number">$NA</p>
+                        <progress id="progress-bar3" class="progress-bar" value="70" max="100"> 70% </progress>
+                    </div>
+                </div>
+                <div class="bottomcard">
+                    <div class="new-goal">
+                        <p>Adding new savings goal</p>
+                    </div>
+                </div>
+            </div>
+
+            <!--Calendar--------------------->
+            <div id="calendar-area" class="tab-content">
+                <h1>Calendar</h1>
+
+                <div class="bottomcards">
+                    <div class="cal-left">
+                        <div id='calendar'></div>
+                    </div>
+                    <div class="cal-right">
+                        <p class="title">Upcoming Renewals</p>
+                        <div class="sub-renew">
+                            <div class="sub-left">
+                                <p class="name">Sub 1</p>
+                                <p class="date">NA</p>
+                            </div>
+                            <div class="sub-right">
+                                <p class="dollar">$NA</p>
+                            </div>
+                        </div>
+                        
+                        <div class="sub-renew">
+                            <div class="sub-left">
+                                <p class="name">Sub 2</p>
+                                <p class="date">NA</p>
+                            </div>
+                            <div class="sub-right">
+                                <p class="dollar">$NA</p>
+                            </div>
+                        </div>
+
+                        <div class="sub-renew">
+                            <div class="sub-left">
+                                <p class="name">Sub 3</p>
+                                <p class="date">NA</p>
+                            </div>
+                            <div class="sub-right">
+                                <p class="dollar">$NA</p>
+                            </div>
+                        </div>
+
+                        <div class="sub-renew">
+                            <div class="sub-left">
+                                <p class="name">Sub 4</p>
+                                <p class="date">NA</p>
+                            </div>
+                            <div class="sub-right">
+                                <p class="dollar">$NA</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

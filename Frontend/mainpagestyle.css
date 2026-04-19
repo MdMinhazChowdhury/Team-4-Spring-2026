@@ -172,12 +172,18 @@ body {
 .recent-transaction {
     height: 100%;
     width: 100%;
+    padding: 5px;
     margin-bottom: 10px;
     Background: rgb(83, 85, 152);
     border: none;
     outline: none;
     border: 2px solid rgba(0, 0, 0, 0.2);
     border-radius: 15px;
+}
+
+.recent-transaction .rec-title {
+    font-size: 20px;
+    font-weight: 600;
 }
 
 .recent-transaction .filter-link {
@@ -190,6 +196,14 @@ body {
     cursor: pointer;
 }
 
+.recent-transaction .rec-transaction {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
 .spending-category {
     flex: 1;
     margin-bottom: 10px;
@@ -200,6 +214,28 @@ body {
     border-radius: 15px;
 }
 
+.chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spending-category .title {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.spending-category .pie-chart {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: conic-gradient(
+        #ff0000 0% 30%,
+        #00ff00 30% 65%,
+        #0000ff 65% 80%,
+        #00e5ff 80% 100%);
+}
+
 .savings-goals {
     flex: 1;
     Background: rgb(176, 176, 203);
@@ -207,6 +243,11 @@ body {
     outline: none;
     border: 2px solid rgba(0, 0, 0, 0.2);
     border-radius: 15px;
+}
+
+.savings-goals .title{
+    font-size: 15px;
+    font-weight: 600;
 }
 
 .bottombar {
@@ -234,8 +275,13 @@ body {
     gap: 20px;
 }
 
-.bottomcards .transaction-details{
+.bottomcards .transaction-details {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    align-content: center;
     flex: 1;
+    padding: 5px;
     Background: rgb(176, 176, 203);
     border: none;
     outline: none;
@@ -243,13 +289,67 @@ body {
     border-radius: 15px;
 }
 
+.transaction-details .title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.transaction-details .top{
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.top .input-box {
+    Background: rgb(181, 181, 181);
+    border: none;
+    outline: none;
+    padding: 3px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+.transaction-details .bottom {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.bottom .submit {
+    width: 80%;
+    padding: 5px;
+    cursor: pointer;
+    Background: rgb(83, 83, 169);
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.bottom .cancel {
+    width: 80%;
+    padding: 5px;
+    cursor: pointer;
+    Background: rgba(255, 255, 255, 1);
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+}
+
 .bottomcards .transaction-history{
     flex: 1;
+    padding: 5px;
+    overflow-y: auto;
     Background: rgb(176, 176, 203);
     border: none;
     outline: none;
     border: 2px solid rgba(0, 0, 0, 0.2);
     border-radius: 15px;
+}
+
+.transaction-history .title {
+    font-size: 20px;
+    font-weight: 600;
 }
 
 .transaction-history .filter-link {
@@ -260,6 +360,23 @@ body {
     border: 2px solid rgba(0, 0, 0, 0.2);
     border-radius: 15px;
     cursor: pointer;
+}
+
+.transaction-history .transaction-list {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.tran-left .bottom {
+    display: flex;
+    gap: 20px;
+}
+
+.tran-left .name {
+    font-weight: 600;
 }
 
 /*---------------------------Subscription------------------------------*/
@@ -345,7 +462,7 @@ body {
 }
 
 /*---------------------------Savings Goals------------------------------*/
-#saving-goal-area .topcards {
+#savings-goals-area .topcards {
     display: flex;
     gap: 15px;
     margin-top: 20px;
@@ -365,9 +482,10 @@ body {
     border-radius: 15px;
 }
 
-.bottomcard .new-goal{
+.bottomcard .new-goal {
     height: 250px;
     margin-top: 20px;
+    padding: 10px;
     Background: rgb(176, 176, 203);
     border: none;
     outline: none;
@@ -375,6 +493,62 @@ body {
     border-radius: 15px;
 }
 
+#savings-goals-area .title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+#savings-goals-area .goal-form {
+    display: flex;
+    gap: 15px;
+}
+
+.new-goal .goal-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin-top: 5px;
+}
+
+.new-goal .goal-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin-top: 5px;
+}
+
+.goal-form .input-box{
+    Background: rgb(181, 181, 181);
+    border: none;
+    outline: none;
+    padding: 3px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+.goal-form .submit {
+    width: 80%;
+    padding: 5px;
+    cursor: pointer;
+    Background: rgb(83, 83, 169);
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.goal-form .cancel {
+    width: 80%;
+    padding: 5px;
+    cursor: pointer;
+    Background: rgba(255, 255, 255, 1);
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+}
 /*---------------------------Calendar------------------------------*/
 #calendar-area .bottomcards {
     display: flex;

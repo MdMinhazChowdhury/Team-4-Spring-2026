@@ -78,14 +78,85 @@
                             <button class="filter-link" data-target="all">All</button>
                             <button class="filter-link" data-target="income">Income</button>
                             <button class="filter-link" data-target="expense">Expense</button>
+
+                            <div class="rec-transaction">
+                                <div class="tran-left">
+                                    <div class="top">
+                                        <p class="name">Transaction 1</p>
+                                    </div>
+                                    <div class="bottom">
+                                        <p class="type">Food</p>
+                                        <p class="date">NA</p>
+                                    </div>
+                                </div>
+                                <div class="tran-right">
+                                    <p class="dollar">-NA</p>
+                                </div>
+                            </div>
+                            <div class="rec-transaction">
+                                <div class="tran-left">
+                                    <div class="top">
+                                        <p class="name">Transaction 2</p>
+                                    </div>
+                                    <div class="bottom">
+                                        <p class="type">Income</p>
+                                        <p class="date">NA</p>
+                                    </div>
+                                </div>
+                                <div class="tran-right">
+                                    <p class="dollar">+NA</p>
+                                </div>
+                            </div>
+                            <div class="rec-transaction">
+                                <div class="tran-left">
+                                    <div class="top">
+                                        <p class="name">Transaction 3</p>
+                                    </div>
+                                    <div class="bottom">
+                                        <p class="type">Subscription</p>
+                                        <p class="date">NA</p>
+                                    </div>
+                                </div>
+                                <div class="tran-right">
+                                    <p class="dollar">-NA</p>
+                                </div>
+                            </div>
+                            <div class="rec-transaction">
+                                <div class="tran-left">
+                                    <div class="top">
+                                        <p class="name">Transaction 4</p>
+                                    </div>
+                                    <div class="bottom">
+                                        <p class="type">Transportation</p>
+                                        <p class="date">NA</p>
+                                    </div>
+                                </div>
+                                <div class="tran-right">
+                                    <p class="dollar">-NA</p>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                     <div class="dash-right">
                         <div class="spending-category">
-                            <p>Spending by Category</p>
+                            <p class="title">Spending by Category</p>
+                            
+                            <div class="chart-container">
+                                <div class="pie-chart"></div>
+                            </div>
                         </div>
                         <div class="savings-goals">
-                            <p>Savings Goals</p>
+                            <p class="title">Savings Goals</p>
+
+                            <div class="save-goal">
+                                <p class="name">Goal 1</p>
+                                <progress id="progress-bar1" class="progress-bar" value="70" max="100"></progress>
+                            </div>
+                            <div class="save-goal">
+                                <p class="name">Goal 2</p>
+                                <progress id="progress-bar1" class="progress-bar" value="40" max="100"></progress>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -101,22 +172,101 @@
                 <h1>Transaction</h1>
                 <div class="bottomcards">
                     <div class="transaction-details">
-                        <p>Transaction Details</p>
+                        <p class="title">Transaction Details</p>
 
-                        <div class="top"></div>
-                        <div class="middle"></div>
-                        <div class="bottom"></div>
+                        <div class="top">
+                            <div class="tran-amount">
+                                <p>Amount($)</p>
+                                <input class="input-box" type="number" step=".01" required>
+                            </div>
+                            <div class="tran-date">
+                                <p>Date</p>
+                                <input class="input-box" type="date" required>
+                            </div>
+                            <div class="tran-description">
+                                <p>Description</p>
+                                <input class="input-box" type="text" required>
+                            </div>
+                            <div class="tran-category">
+                                <p>Category</p>
+                                <select class="input-box">
+                                    <option>Food</option>
+                                    <option>Income</option>
+                                    <option>Subscription</option>
+                                    <option>Transportation</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="bottom">
+                            <button class="submit">Submit</button>
+                            <button class="cancel">Cancel</button>
+                        </div>
                     </div>
 
                     <div class="transaction-history">
-                        <p>Transaction History</p>
+                        <p class=title>Transaction History</p>
 
                         <div class="filters">
                             <button class="filter-link">All</button>
                             <button class="filter-link">This Month</button>
                             <button class="filter-link">Last 7 Days</button>
                         </div>
-                        <div class="transaction-list"></div>
+                        <div class="transaction-list">
+                            <div class="tran-left">
+                                <div class="top">
+                                    <p class="name">Transaction 1</p>
+                                </div>
+                                <div class="bottom">
+                                    <p class="type">Food</p>
+                                    <p class="date">NA</p>
+                                </div>
+                            </div>
+                            <div class="tran-right">
+                                <p class="dollar">-NA</p>
+                            </div>
+                        </div>
+                        <div class="transaction-list">
+                            <div class="tran-left">
+                                <div class="top">
+                                    <p class="name">Transaction 2</p>
+                                </div>
+                                <div class="bottom">
+                                    <p class="type">Income</p>
+                                    <p class="date">NA</p>
+                                </div>
+                            </div>
+                            <div class="tran-right">
+                                <p class="dollar">+NA</p>
+                            </div>
+                        </div>
+                        <div class="transaction-list">
+                            <div class="tran-left">
+                                <div class="top">
+                                    <p class="name">Transaction 3</p>
+                                </div>
+                                <div class="bottom">
+                                    <p class="type">Subscription</p>
+                                    <p class="date">NA</p>
+                                </div>
+                            </div>
+                            <div class="tran-right">
+                                <p class="dollar">-NA</p>
+                            </div>
+                        </div>
+                        <div class="transaction-list">
+                            <div class="tran-left">
+                                <div class="top">
+                                    <p class="name">Transaction 4</p>
+                                </div>
+                                <div class="bottom">
+                                    <p class="type">Transportation</p>
+                                    <p class="date">NA</p>
+                                </div>
+                            </div>
+                            <div class="tran-right">
+                                <p class="dollar">-NA</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -197,22 +347,49 @@
                     <div class="goal">
                         <p class="title">Goal 1</p>
                         <p class="number">$NA</p>
-                        <progress id="progress-bar1" class="progress-bar" value="70" max="100"> 70% </progress>
+                        <progress id="progress-bar1" class="progress-bar" value="70" max="100"></progress>
                     </div>
                     <div class="goal">
                         <p class="title">Goal 2</p>
                         <p class="number">$NA</p>
-                        <progress id="progress-bar2" class="progress-bar" value="70" max="100"> 70% </progress>
+                        <progress id="progress-bar2" class="progress-bar" value="40" max="100"></progress>
                     </div>
                     <div class="goal">
                         <p class="title">Goal 3</p>
                         <p class="number">$NA</p>
-                        <progress id="progress-bar3" class="progress-bar" value="70" max="100"> 70% </progress>
+                        <progress id="progress-bar3" class="progress-bar" value="90" max="100"></progress>
                     </div>
                 </div>
                 <div class="bottomcard">
+                    
                     <div class="new-goal">
-                        <p>Adding new savings goal</p>
+                        <p class="title">Adding new savings goal</p>
+
+                        <div class="goal-form">
+                            <div class="goal-left">
+                                <div class="goal-name">
+                                    <p>Goal Name</p>
+                                    <input class="input-box" type="text" required>
+                                </div>
+                                <div class="current-savings">
+                                    <p>Current Savings($)</p>
+                                    <input class="input-box" type="number" step=".01" required>
+                                </div>
+                                <button class="submit">Submit</button>
+                            </div>
+
+                            <div class="goal-right">
+                                <div class="target-amount">
+                                    <p>Target Amount($)</p>
+                                    <input class="input-box" type="number" step=".01" required>
+                                </div>
+                                <div class="target-deadline">
+                                    <p>Target Deadline</p>
+                                    <input class="input-box" type="date" required>
+                                </div>
+                                <button class="cancel">Cancel</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

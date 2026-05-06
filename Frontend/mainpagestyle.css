@@ -1,0 +1,612 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900;&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background-color:rgb(30, 33, 94);
+}
+
+/*---------------------------topbar------------------------------*/
+.topbar {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    color: white
+}
+
+.topbar .topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 30px;
+}
+
+.topbar .title {
+    font-size: 25px;
+}
+
+.topbar .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 30px;
+}
+
+/*---------------------------sidebar------------------------------*/
+.sidebar {
+    width: 25%;
+    padding: 10px;
+    height:100%;
+    min-height: calc(100);
+}
+
+.nav-link {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+    padding: 5px;
+    cursor: pointer;
+    Background: rgba(255, 255, 255, 1);
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 40px;
+    font-size: 20px
+}
+
+.main-layout {
+    display: flex;
+    min-height: calc(100vh);
+}
+
+.content-area {
+    flex: 1;
+    background-color: white;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/*---------------------------Dashboard------------------------------*/
+.topcards {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+.total-balance {
+    flex: 1;
+    height: 100%;
+    margin-bottom: 10px;
+    Background: rgb(83, 85, 152);
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+.monthly-income {
+    flex: 1;
+    height: 100%;
+    margin-bottom: 10px;
+    Background: rgb(176, 176, 203);
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+.monthly-expenses {
+    flex: 1;
+    height: 100%;
+    margin-bottom: 10px;
+    Background: rgb(83, 85, 152);
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+.net-savings {
+    flex: 1;
+    height: 100%;
+    margin-bottom: 10px;
+    Background: rgb(176, 176, 203);
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+.title {
+    text-align: center;
+    font-size: 12px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.number {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.bottom {
+    text-align: center;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.bottomcards {
+    height: 300px;
+    display: flex;
+    gap: 20px;
+}
+
+.bottomcards .dash-left {
+    flex: 3;
+    padding: 5px;
+}
+
+.bottomcards .dash-right {
+    height: 100%;
+    flex: 2;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.recent-transaction {
+    height: 100%;
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    Background: rgb(83, 85, 152);
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+.recent-transaction .rec-title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.recent-transaction .filter-link {
+    Background: rgb(181, 181, 181);
+    border: none;
+    outline: none;
+    padding: 2px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.recent-transaction .rec-transaction {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.spending-category {
+    flex: 1;
+    margin-bottom: 10px;
+    Background: rgb(176, 176, 203);
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+.chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spending-category .title {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.spending-category .pie-chart {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: conic-gradient(
+        #ff0000 0% 30%,
+        #00ff00 30% 65%,
+        #0000ff 65% 80%,
+        #00e5ff 80% 100%);
+}
+
+.savings-goals {
+    flex: 1;
+    Background: rgb(176, 176, 203);
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+.savings-goals .title{
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.bottombar {
+    display: flex;
+}
+
+.gen-report {
+    width: 25%;
+    height: 30px;
+    margin-top: 10px;
+    margin-left: auto;
+    Background: rgb(83, 85, 152);
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/*---------------------------Transaction------------------------------*/
+#transaction-area .bottomcards {
+    display: flex;
+    height: 350px;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.bottomcards .transaction-details {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    align-content: center;
+    flex: 1;
+    padding: 5px;
+    Background: rgb(176, 176, 203);
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+.transaction-details .title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.transaction-details .top{
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.top .input-box {
+    Background: rgb(181, 181, 181);
+    border: none;
+    outline: none;
+    padding: 3px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+.transaction-details .bottom {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.bottom .submit {
+    width: 80%;
+    padding: 5px;
+    cursor: pointer;
+    Background: rgb(83, 83, 169);
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.bottom .cancel {
+    width: 80%;
+    padding: 5px;
+    cursor: pointer;
+    Background: rgba(255, 255, 255, 1);
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.bottomcards .transaction-history{
+    flex: 1;
+    padding: 5px;
+    overflow-y: auto;
+    Background: rgb(176, 176, 203);
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+.transaction-history .title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.transaction-history .filter-link {
+    Background: rgb(181, 181, 181);
+    border: none;
+    outline: none;
+    padding: 3px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.transaction-history .transaction-list {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.tran-left .bottom {
+    display: flex;
+    gap: 20px;
+}
+
+.tran-left .name {
+    font-weight: 600;
+}
+
+/*---------------------------Subscription------------------------------*/
+#subscription-area .topcards {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px; 
+}
+
+.topcards .total-sub {
+    flex: 1;
+    Background: rgb(83, 83, 169);
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+.topcards .monthly-cost {
+    flex: 1;
+    Background: rgb(83, 83, 169);
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+.topcards .renew {
+    flex: 1;
+    Background: rgb(83, 83, 169);
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+.total-sub .number {
+    margin-bottom: 30px;
+}
+
+#subscription-area .bottomcard {
+    height: 250px;
+    margin-top: 20px;
+    padding: 5px;
+    overflow-y: auto;
+    Background: rgb(176, 176, 203);
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+.bottomcard .title {
+    text-align: left;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.act-sub {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.act-left .name {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.act-left .date {
+    font-size: 10px;
+}
+
+.act-left .days {
+    font-size: 15px;
+}
+
+.act-left .dollar {
+    font-size: 15px;
+    font-weight: 400;
+}
+
+/*---------------------------Savings Goals------------------------------*/
+#savings-goals-area .topcards {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.goal {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    padding: 5px;
+    Background: rgb(83, 83, 169);
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+.bottomcard .new-goal {
+    height: 250px;
+    margin-top: 20px;
+    padding: 10px;
+    Background: rgb(176, 176, 203);
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+#savings-goals-area .title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+#savings-goals-area .goal-form {
+    display: flex;
+    gap: 15px;
+}
+
+.new-goal .goal-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin-top: 5px;
+}
+
+.new-goal .goal-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin-top: 5px;
+}
+
+.goal-form .input-box{
+    Background: rgb(181, 181, 181);
+    border: none;
+    outline: none;
+    padding: 3px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+.goal-form .submit {
+    width: 80%;
+    padding: 5px;
+    cursor: pointer;
+    Background: rgb(83, 83, 169);
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.goal-form .cancel {
+    width: 80%;
+    padding: 5px;
+    cursor: pointer;
+    Background: rgba(255, 255, 255, 1);
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+}
+/*---------------------------Calendar------------------------------*/
+#calendar-area .bottomcards {
+    display: flex;
+    gap: 15px;
+}
+
+.bottomcards .cal-left {
+    flex: 3;
+    height: 350px;
+    margin-top: 20px;
+    padding: 10px;
+    Background: rgb(176, 176, 203);
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+#calendar {
+    height: 100%;
+    cursor: pointer;
+}
+
+.bottomcards .cal-right {
+    flex: 2;
+    height: 350px;
+    overflow-y: auto;
+    margin-top: 20px;
+    Background: rgb(176, 176, 203);
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+.cal-right .title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.sub-renew {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.sub-left .name {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.sub-left .date {
+    font-size: 10px;
+}
+
+.sub-left .dollar {
+    font-size: 15px;
+    font-weight: 400;
+}

@@ -13,31 +13,33 @@
         <h1>Welcome to FinTrac</h1>
     </div>
     <div class="wrapper">
-        <form action="">
+        <form id="login-form" action="">
             <h1>Log In</h1>
             <div class="button-box">
-                <button type="button">Continue with Google</button>
+                <button id="google-login" type="button">Continue with Google</button>
                 <i class='bx bxl-google' ></i>
             </div>
             <div class="input-box">
-                <input type="text" placeholder="username" required>
+                <input id="login-username" type="text" placeholder="username" required>
                  <i class='bx bxs-user'></i>
             </div>
             <div class="input-box">
-                <input type="text" placeholder="password" required>
+                <input id="login-password" type="password" placeholder="password" required>
                 <i class='bx bxs-lock' ></i>
             </div>
             <div class="input-box">
                 <button type="submit" class="btn">Sign In</button>
             </div>
             <div class="register-link">
-                <p>Don't have an account, <a href="#">SignUp</a></p>
+                <p>Don't have an account, <a id="signup-link" href="#">SignUp</a></p>
             </div>
+            <p id="login-status" aria-live="polite" style="margin-top:10px;text-align:center;"></p>
             
             
         </form>
     </div>
 	<script src="frontend-tests.js"></script>
 	<script src="integration-tests.js"></script>
+	<script src="script.js"></script>
 </body>
 </html>

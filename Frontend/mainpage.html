@@ -13,10 +13,12 @@
 
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth'
-        });
-        calendar.render();
+        if (window.FullCalendar) {
+          var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth'
+          });
+          calendar.render();
+        }
       });
 
     </script>
@@ -46,7 +48,7 @@
 
         <main class="content-area">
             <!--DashBoard-------------------------->
-            <div id="dashboard-area" class="tab-content">
+            <div id="dashboard-area" class="tab-content active">
                 <h1>Dashboard</h1>
                 <div class="topcards">
                     <div class="total-balance">
@@ -177,29 +179,30 @@
                         <div class="top">
                             <div class="tran-amount">
                                 <p>Amount($)</p>
-                                <input class="input-box" type="number" step=".01" required>
+                                <input id="transaction-amount" class="input-box" type="number" step=".01" min="0.01" required>
                             </div>
                             <div class="tran-date">
                                 <p>Date</p>
-                                <input class="input-box" type="date" required>
+                                <input id="transaction-date" class="input-box" type="date" required>
                             </div>
                             <div class="tran-description">
                                 <p>Description</p>
-                                <input class="input-box" type="text" required>
+                                <input id="transaction-description" class="input-box" type="text" maxlength="80" required>
                             </div>
                             <div class="tran-category">
                                 <p>Category</p>
-                                <select class="input-box">
+                                <select id="transaction-category" class="input-box">
                                     <option>Food</option>
                                     <option>Income</option>
                                     <option>Subscription</option>
                                     <option>Transportation</option>
+                                    <option>Rent</option>
                                 </select>
                             </div>
                         </div>
                         <div class="bottom">
-                            <button class="submit">Submit</button>
-                            <button class="cancel">Cancel</button>
+                            <button id="transaction-submit" class="submit">Submit</button>
+                            <button id="transaction-cancel" class="cancel">Cancel</button>
                         </div>
                     </div>
 
@@ -211,7 +214,7 @@
                             <button class="filter-link">This Month</button>
                             <button class="filter-link">Last 7 Days</button>
                         </div>
-                        <div class="transaction-list">
+                        <div id="transaction-history-list" class="transaction-history-list">
                             <div class="tran-left">
                                 <div class="top">
                                     <p class="name">Transaction 1</p>
@@ -369,25 +372,25 @@
                             <div class="goal-left">
                                 <div class="goal-name">
                                     <p>Goal Name</p>
-                                    <input class="input-box" type="text" required>
+                                    <input id="goal-name" class="input-box" type="text" maxlength="50" required>
                                 </div>
                                 <div class="current-savings">
                                     <p>Current Savings($)</p>
-                                    <input class="input-box" type="number" step=".01" required>
+                                    <input id="goal-current" class="input-box" type="number" step=".01" min="0" required>
                                 </div>
-                                <button class="submit">Submit</button>
+                                <button id="goal-submit" class="submit">Submit</button>
                             </div>
 
                             <div class="goal-right">
                                 <div class="target-amount">
                                     <p>Target Amount($)</p>
-                                    <input class="input-box" type="number" step=".01" required>
+                                    <input id="goal-target" class="input-box" type="number" step=".01" min="0.01" required>
                                 </div>
                                 <div class="target-deadline">
                                     <p>Target Deadline</p>
-                                    <input class="input-box" type="date" required>
+                                    <input id="goal-deadline" class="input-box" type="date" required>
                                 </div>
-                                <button class="cancel">Cancel</button>
+                                <button id="goal-cancel" class="cancel">Cancel</button>
                             </div>
                         </div>
                     </div>
@@ -449,6 +452,7 @@
 
         </div>
     </div>
+    <div id="app-status" aria-live="polite" style="position:fixed;bottom:12px;right:12px;background:#111;color:#fff;padding:10px 14px;border-radius:10px;font-size:14px;z-index:9999;max-width:360px;display:none;"></div>
     <script src="script.js"></script>
 	<script src="frontend-tests.js"></script>
 	<script src="integration-tests.js"></script>

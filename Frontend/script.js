@@ -1,10 +1,88 @@
 const API_BASE = window.FINTRAC_API_BASE || "http://127.0.0.1:5000";
 let currentUserId = Number(localStorage.getItem("fintrac_user_id")) || 1;
 let calendarInstance = null;
+let recentDashboardTransactions = [];
+let currentRecentFilter = "all";
+let currentTransactionFilter = "all";
+
+const CATEGORY_COLORS = ["#ff6b6b", "#4dabf7", "#51cf66", "#ffd43b", "#845ef7", "#20c997"];
+
+function renderSpendingChart(spendingByCategory = {}) {
+  const chart = document.querySelector(".pie-chart");
+  const container = document.querySelector(".chart-container");
+  if (!chart || !container) return;
+
+  let legend = container.querySelector(".chart-legend");
+  if (!legend) {
+    legend = document.createElement("div");
+    legend.className = "chart-legend";
+    container.appendChild(legend);
+  }
+
+  const entries = Object.entries(spendingByCategory)
+    .map(([category, percent]) => [category, Number(percent)])
+    .filter(([, percent]) => Number.isFinite(percent) && percent > 0);
+
+  if (!entries.length) {
+    chart.style.background = "#d9d9e6";
+    chart.textContent = "No data";
+    legend.innerHTML = `<p class="empty-chart-message">No expense data yet.</p>`;
+    return;
+  }
+
+  let current = 0;
+  const slices = entries.map(([category, percent], index) => {
+    const color = CATEGORY_COLORS[index % CATEGORY_COLORS.length];
+    const start = current;
+    const end = current + percent;
+    current = end;
+    return `${color} ${start}% ${end}%`;
+  });
+
+  chart.textContent = "";
+  chart.style.background = `conic-gradient(${slices.join(", ")})`;
+  legend.innerHTML = entries.map(([category, percent], index) => `
+    <div class="legend-row">
+      <span class="legend-color" style="background:${CATEGORY_COLORS[index % CATEGORY_COLORS.length]}"></span>
+      <span class="legend-label">${category}</span>
+      <span class="legend-percent">${percent.toFixed(1)}%</span>
+    </div>
+  `).join("");
+}
+
 
 function money(value) {
   const n = Number(value || 0);
   return "$" + n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function isCurrentMonth(dateValue) {
+  if (!dateValue) return false;
+  const today = new Date();
+  const txDate = new Date(`${dateValue}T00:00:00`);
+  return txDate.getFullYear() === today.getFullYear() && txDate.getMonth() === today.getMonth();
+}
+
+function updateDashboardTotalsFromTransactions(transactions = []) {
+  const monthlyTransactions = transactions.filter(t => isCurrentMonth(t.date));
+
+  const monthlyIncome = monthlyTransactions
+    .filter(t => t.tx_type === "income")
+    .reduce((sum, t) => sum + Number(t.amount || 0), 0);
+
+  const monthlyExpenses = monthlyTransactions
+    .filter(t => t.tx_type === "expense")
+    .reduce((sum, t) => sum + Number(t.amount || 0), 0);
+
+  const netSavings = monthlyIncome - monthlyExpenses;
+
+  const incomeCard = document.querySelector(".monthly-income .number");
+  const expenseCard = document.querySelector(".monthly-expenses .number");
+  const savingsCard = document.querySelector(".net-savings .number");
+
+  if (incomeCard) incomeCard.textContent = money(monthlyIncome);
+  if (expenseCard) expenseCard.textContent = money(monthlyExpenses);
+  if (savingsCard) savingsCard.textContent = money(netSavings);
 }
 
 function statusMessage(message, isError = false) {
@@ -46,33 +124,62 @@ function transactionHtml(t) {
   </div>`;
 }
 
+function setActiveFilterButton(containerSelector, filter) {
+  document.querySelectorAll(`${containerSelector} .filter-link`).forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.filter === filter);
+  });
+}
+
+function renderRecentTransactions(filter = "all") {
+  const recent = document.querySelector(".recent-transaction");
+  if (!recent) return;
+
+  const controls = recent.querySelectorAll(":scope > .rec-title, :scope > .filter-link");
+  recent.innerHTML = "";
+  controls.forEach(c => recent.appendChild(c));
+
+  const filteredTransactions = filter === "all"
+    ? recentDashboardTransactions
+    : recentDashboardTransactions.filter(t => t.tx_type === filter);
+
+  recent.insertAdjacentHTML("beforeend",
+    filteredTransactions.map(transactionHtml).join("") || '<p class="empty-transactions">No transactions match this filter.</p>'
+  );
+  setActiveFilterButton(".recent-transaction", filter);
+}
+
 async function loadDashboard() {
   const d = await api(`/dashboard/${currentUserId}`);
-  document.querySelector(".total-balance .number").textContent = money(d.total_balance);
-  document.querySelector(".monthly-income .number").textContent = money(d.monthly_income);
-  document.querySelector(".monthly-expenses .number").textContent = money(d.monthly_expenses);
-  document.querySelector(".net-savings .number").textContent = money(d.net_savings);
 
-  const recent = document.querySelector(".recent-transaction");
-  if (recent) {
-    const controls = recent.querySelectorAll(":scope > .rec-title, :scope > .filter-link");
-    recent.innerHTML = "";
-    controls.forEach(c => recent.appendChild(c));
-    recent.insertAdjacentHTML("beforeend", (d.recent_transactions || []).map(transactionHtml).join("") || "<p>No transactions yet.</p>");
-  }
+  const balanceCard = document.querySelector(".total-balance .number");
+  if (balanceCard) balanceCard.textContent = money(d.total_balance);
 
-  const chart = document.querySelector(".pie-chart");
-  if (chart) {
-    const rows = Object.entries(d.spending_by_category || {}).map(([k, v]) => `${k}: ${v}%`).join("<br>");
-    chart.innerHTML = rows || "No expense data";
-  }
+  const incomeCard = document.querySelector(".monthly-income .number");
+  const expenseCard = document.querySelector(".monthly-expenses .number");
+  const savingsCard = document.querySelector(".net-savings .number");
+
+  if (incomeCard) incomeCard.textContent = money(d.monthly_income);
+  if (expenseCard) expenseCard.textContent = money(d.monthly_expenses);
+  if (savingsCard) savingsCard.textContent = money(d.net_savings);
+
+  recentDashboardTransactions = d.recent_transactions || [];
+  renderRecentTransactions(currentRecentFilter);
+
+  renderSpendingChart(d.spending_by_category || {});
 }
 
 async function loadTransactions(filter = "all") {
+  currentTransactionFilter = filter;
+  setActiveFilterButton(".transaction-history", filter);
+
   const txs = await api(`/transactions/${currentUserId}?filter=${filter}`);
+  const allTxs = filter === "all" ? txs : await api(`/transactions/${currentUserId}?filter=all`);
+
+  updateDashboardTotalsFromTransactions(allTxs);
+
   const list = document.getElementById("transaction-history-list") || document.querySelector(".transaction-history");
   if (!list) return;
-  list.innerHTML = txs.map(transactionHtml).join("") || "<p>No transactions match this filter.</p>";
+  list.innerHTML = txs.map(transactionHtml).join("") || '<p class="empty-transactions">No transactions match this filter.</p>';
 }
 
 async function loadSubscriptions() {
@@ -123,7 +230,12 @@ async function loadCalendar() {
 
 async function refreshAll() {
   if (!document.getElementById("dashboard-area")) return;
-  await Promise.allSettled([loadDashboard(), loadTransactions(), loadSubscriptions(), loadSavingsGoals(), loadCalendar()]);
+
+  const dashboardResult = await Promise.allSettled([loadDashboard(), loadTransactions(currentTransactionFilter)]);
+  await Promise.allSettled([loadSubscriptions(), loadSavingsGoals(), loadCalendar()]);
+
+  const failed = dashboardResult.find(result => result.status === "rejected");
+  if (failed) throw failed.reason;
 }
 
 function wireMainPage() {
@@ -140,15 +252,23 @@ function wireMainPage() {
         tx_type: category === "Income" ? "income" : "expense"
       })});
       statusMessage("Transaction saved and dashboard refreshed.");
+      ["transaction-amount", "transaction-date", "transaction-description"].forEach(id => {
+        const input = document.getElementById(id);
+        if (input) input.value = "";
+      });
       await refreshAll();
     } catch (e) { statusMessage(e.message, true); }
   });
   document.getElementById("transaction-cancel")?.addEventListener("click", () => {
     ["transaction-amount", "transaction-date", "transaction-description"].forEach(id => document.getElementById(id).value = "");
   });
+  document.querySelectorAll(".recent-transaction .filter-link").forEach(btn => btn.addEventListener("click", () => {
+    currentRecentFilter = btn.dataset.filter || "all";
+    renderRecentTransactions(currentRecentFilter);
+  }));
+
   document.querySelectorAll(".transaction-history .filter-link").forEach(btn => btn.addEventListener("click", () => {
-    const label = btn.textContent.trim().toLowerCase().replaceAll(" ", "_");
-    loadTransactions(label === "all" ? "all" : label);
+    loadTransactions(btn.dataset.filter || "all").catch(e => statusMessage(e.message, true));
   }));
   document.getElementById("goal-submit")?.addEventListener("click", async () => {
     try {

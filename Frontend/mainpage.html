@@ -77,9 +77,9 @@
                     <div class="dash-left">
                         <div class="recent-transaction">
                             <p class="rec-title">Recent Transaction</p>
-                            <button class="filter-link" data-target="all">All</button>
-                            <button class="filter-link" data-target="income">Income</button>
-                            <button class="filter-link" data-target="expense">Expense</button>
+                            <button type="button" class="filter-link active" data-filter="all">All</button>
+                            <button type="button" class="filter-link" data-filter="income">Income</button>
+                            <button type="button" class="filter-link" data-filter="expense">Expense</button>
 
                             <div class="rec-transaction">
                                 <div class="tran-left">
@@ -196,7 +196,6 @@
                                     <option>Income</option>
                                     <option>Subscription</option>
                                     <option>Transportation</option>
-                                    <option>Rent</option>
                                 </select>
                             </div>
                         </div>
@@ -207,68 +206,15 @@
                     </div>
 
                     <div class="transaction-history">
-                        <p class=title>Transaction History</p>
+                        <p class="title">Transaction History</p>
 
                         <div class="filters">
-                            <button class="filter-link">All</button>
-                            <button class="filter-link">This Month</button>
-                            <button class="filter-link">Last 7 Days</button>
+                            <button type="button" class="filter-link active" data-filter="all">All</button>
+                            <button type="button" class="filter-link" data-filter="this_month">This Month</button>
+                            <button type="button" class="filter-link" data-filter="last_7_days">Last 7 Days</button>
                         </div>
                         <div id="transaction-history-list" class="transaction-history-list">
-                            <div class="tran-left">
-                                <div class="top">
-                                    <p class="name">Transaction 1</p>
-                                </div>
-                                <div class="bottom">
-                                    <p class="type">Food</p>
-                                    <p class="date">NA</p>
-                                </div>
-                            </div>
-                            <div class="tran-right">
-                                <p class="dollar">-NA</p>
-                            </div>
-                        </div>
-                        <div class="transaction-list">
-                            <div class="tran-left">
-                                <div class="top">
-                                    <p class="name">Transaction 2</p>
-                                </div>
-                                <div class="bottom">
-                                    <p class="type">Income</p>
-                                    <p class="date">NA</p>
-                                </div>
-                            </div>
-                            <div class="tran-right">
-                                <p class="dollar">+NA</p>
-                            </div>
-                        </div>
-                        <div class="transaction-list">
-                            <div class="tran-left">
-                                <div class="top">
-                                    <p class="name">Transaction 3</p>
-                                </div>
-                                <div class="bottom">
-                                    <p class="type">Subscription</p>
-                                    <p class="date">NA</p>
-                                </div>
-                            </div>
-                            <div class="tran-right">
-                                <p class="dollar">-NA</p>
-                            </div>
-                        </div>
-                        <div class="transaction-list">
-                            <div class="tran-left">
-                                <div class="top">
-                                    <p class="name">Transaction 4</p>
-                                </div>
-                                <div class="bottom">
-                                    <p class="type">Transportation</p>
-                                    <p class="date">NA</p>
-                                </div>
-                            </div>
-                            <div class="tran-right">
-                                <p class="dollar">-NA</p>
-                            </div>
+                            <p>No transactions yet.</p>
                         </div>
                     </div>
                 </div>
